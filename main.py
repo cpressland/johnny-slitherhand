@@ -1,7 +1,9 @@
-import random
+import json
 from wsgiref.simple_server import make_server
 
 import falcon
+
+from logic import move_logic
 
 
 class Healthz:
@@ -28,9 +30,9 @@ class Move:
     def on_post(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_JSON
-        move = random.choice(["up", "down", "left", "right"])
+        move = move_logic()
         resp.media = {"move": move}
-        print(req.media)
+        print(json.dumps(req.media))
 
 
 class Start:
@@ -38,7 +40,7 @@ class Start:
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
         resp.text = "ok"
-        print(req.media)
+        print(json.dumps(req.media))
 
 
 class End:
@@ -46,7 +48,7 @@ class End:
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
         resp.text = "ok"
-        print(req.media)
+        print(json.dumps(req.media))
 
 
 if __name__ == "__main__":
