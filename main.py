@@ -1,5 +1,8 @@
-import falcon
+import json
+import random
 from wsgiref.simple_server import make_server
+
+import falcon
 
 
 class Healthz:
@@ -9,8 +12,51 @@ class Healthz:
         resp.text = "healthy"
 
 
-app = falcon.App()
-app.add_route("/healthz", Healthz())
-with make_server("", 6502, app) as api:
-    print("Running on 0.0.0.0:6502")
-    api.serve_forever()
+class Info:
+    def on_get(self, req, resp):
+        resp.status = falcon.HTTP_200
+        resp.content_type = falcon.MEDIA_JSON
+        resp.json = {
+            "apiversion": "1",
+            "author": "CP",
+            "color": "#FF00FF",
+            "head": "bender",
+            "tail": "sharp",
+        }
+
+
+class Move:
+    def on_post(self, req, resp):
+        resp.status = falcon.HTTP_200
+        resp.content_type = falcon.MEDIA_JSON
+        move = random.choice(["up", "down", "left", "right"])
+        resp.json = {"move": move}
+        print(json.load(req.stream))
+
+
+class Start:
+    def on_post(self, req, resp):
+        resp.status = falcon.HTTP_200
+        resp.content_type = falcon.MEDIA_TEXT
+        resp.text = "ok"
+        print(f"{json.load(req.stream)} STARTED")
+
+
+class End:
+    def on_post(self, req, resp):
+        resp.status = falcon.HTTP_200
+        resp.content_type = falcon.MEDIA_TEXT
+        resp.text = "ok"
+        print(f"{json.load(req.stream)} ENDED")
+
+
+if __name__ == "__main__":
+    app = falcon.App()
+    app.add_route("/", Info())
+    app.add_route("/move", Move())
+    app.add_route("/start", Start())
+    app.add_route("/end", End())
+    app.add_route("/healthz", Healthz())
+    with make_server("", 6502, app) as api:
+        print("Running on 0.0.0.0:6502")
+        api.serve_forever()
