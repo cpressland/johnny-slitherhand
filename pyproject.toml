@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "snakegate-sg1"
+version = "1.0.0"
+description = "Battlesnake!!"
+authors = ["Chris Pressland <mail@cpressland.io>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "snakegate_sg1"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+falcon = "^3.1.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.6.0"
+isort = "^5.10.1"
+Flake8-pyproject = "^0.9.0"
+
+[tool.flake8]
+max-line-length = 120
+
+[tool.black]
+line-length = 120
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
