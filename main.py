@@ -28,9 +28,10 @@ class Info:
 
 class Move:
     def on_post(self, req, resp):
+        media = req.media
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_JSON
-        move = move_logic(body=req.media)
+        move = move_logic(body=media["you"]["body"])
         resp.media = {"move": move}
         print(json.dumps(req.media))
 
