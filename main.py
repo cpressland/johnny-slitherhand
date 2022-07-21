@@ -31,7 +31,11 @@ class Move:
         media = req.media
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_JSON
-        move = move_logic(body=media["you"]["body"])
+        move = move_logic(
+            body=media["you"]["body"],
+            height=media["board"]["height"],
+            width=media["board"]["width"],
+        )
         resp.media = {"move": move}
         print(json.dumps(req.media))
 

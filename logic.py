@@ -1,29 +1,31 @@
 import random
 
 
-def move_logic(body):
+def move_logic(body, height, width):
     options = ["up", "down", "left", "right"]
     head = body[0]
     torso = body[1:]
     for body_chunk in torso:
-        if body_chunk["x"] == head["x"]-1:
-            try:
+        try:
+            if body_chunk["x"] == head["x"] - 1:
                 options.remove("left")
-            except ValueError:
-                pass
-        elif body_chunk["x"] == head["x"]+1:
-            try:
+            elif body_chunk["x"] == head["x"] + 1:
                 options.remove("right")
-            except ValueError:
-                pass
-        elif body_chunk["y"] == head["y"]-1:
-            try:
+            elif body_chunk["y"] == head["y"] - 1:
                 options.remove("down")
-            except ValueError:
-                pass
-        elif body_chunk["y"] == head["y"]+1:
-            try:
+            elif body_chunk["y"] == head["y"] + 1:
                 options.remove("up")
-            except ValueError:
-                pass
+        except ValueError:
+            continue
+    try:
+        if head["y"] == 0:
+            options.remove("down")
+        elif head["y"] == height:
+            options.remove("up")
+        elif head["x"] == 0:
+            options.remove("left")
+        elif head["x"] == width:
+            options.remove("right")
+    except ValueError:
+        pass
     return random.choice(options)
