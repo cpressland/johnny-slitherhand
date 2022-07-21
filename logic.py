@@ -18,13 +18,13 @@ def move_logic(body, height, width):
         except ValueError:
             continue
     try:
-        if head["y"] == 1:
+        if head["y"] <= 1:
             options.remove("down")
-        elif head["y"] == height - 1:
+        elif head["y"] >= height - 1:
             options.remove("up")
-        elif head["x"] == 1:
+        elif head["x"] <= 1:
             options.remove("left")
-        elif head["x"] == width - 1:
+        elif head["x"] >= width - 1:
             options.remove("right")
     except ValueError:
         pass
