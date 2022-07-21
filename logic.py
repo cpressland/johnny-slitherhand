@@ -22,7 +22,7 @@ def move_logic(body, height, width):
         except ValueError:
             continue
     try:
-        if head["y"] == 2:
+        if head["y"] == 0:
             options.remove("down")
             print("Removed Down")
         elif head["y"] == height - 1:
@@ -31,7 +31,7 @@ def move_logic(body, height, width):
     except ValueError:
         pass
     try:
-        if head["x"] == 2:
+        if head["x"] == 0:
             options.remove("left")
             print("Removed Left")
         elif head["x"] == width - 1:
