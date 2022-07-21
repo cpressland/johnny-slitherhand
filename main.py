@@ -1,4 +1,3 @@
-import json
 import random
 from wsgiref.simple_server import make_server
 
@@ -16,7 +15,7 @@ class Info:
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_JSON
-        resp.json = {
+        resp.media = {
             "apiversion": "1",
             "author": "CP",
             "color": "#FF00FF",
@@ -30,8 +29,8 @@ class Move:
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_JSON
         move = random.choice(["up", "down", "left", "right"])
-        resp.json = {"move": move}
-        print(json.load(req.stream))
+        resp.media = {"move": move}
+        print(req.media)
 
 
 class Start:
@@ -39,7 +38,7 @@ class Start:
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
         resp.text = "ok"
-        print(f"{json.load(req.stream)} STARTED")
+        print(req.media)
 
 
 class End:
@@ -47,7 +46,7 @@ class End:
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
         resp.text = "ok"
-        print(f"{json.load(req.stream)} ENDED")
+        print(req.media)
 
 
 if __name__ == "__main__":
