@@ -9,26 +9,34 @@ def move_logic(body, height, width):
         try:
             if body_chunk["x"] == head["x"] - 1:
                 options.remove("left")
+                print("Removed Left")
             elif body_chunk["x"] == head["x"] + 1:
                 options.remove("right")
+                print("Removed Right")
             elif body_chunk["y"] == head["y"] - 1:
                 options.remove("down")
+                print("Removed Down")
             elif body_chunk["y"] == head["y"] + 1:
                 options.remove("up")
+                print("Removed Up")
         except ValueError:
             continue
     try:
         if head["y"] == 2:
             options.remove("down")
+            print("Removed Down")
         elif head["y"] == height - 1:
             options.remove("up")
+            print("Removed Up")
     except ValueError:
         pass
     try:
         if head["x"] == 2:
             options.remove("left")
+            print("Removed Left")
         elif head["x"] == width - 1:
             options.remove("right")
+            print("Removed Right")
     except ValueError:
         pass
     return random.choice(options)
