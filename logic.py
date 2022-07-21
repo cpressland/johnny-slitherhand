@@ -8,7 +8,7 @@ def move_logic(body):
     if neck["x"] < head["x"]:
         options.remove("left")
     elif neck["x"] > head["x"]:
-        options.remove("left")
+        options.remove("right")
     elif neck["y"] < head["y"]:
         options.remove("down")
     elif neck["y"] > head["y"]:
