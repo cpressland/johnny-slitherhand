@@ -21,28 +21,4 @@ def move_logic(body, height, width):
                 print("Cannibalism: Removed Up")
         except ValueError:
             continue
-    try:
-        if head["y"] == 0:
-            options.remove("down")
-            print("Wall: Removed Down")
-    except ValueError:
-        pass
-    try:
-        if head["y"] == height - 1:
-            options.remove("up")
-            print("Wall: Removed Up")
-    except ValueError:
-        pass
-    try:
-        if head["x"] == 0:
-            options.remove("left")
-            print("Wall: Removed Left")
-    except ValueError:
-        pass
-    try:
-        if head["x"] == width - 1:
-            options.remove("right")
-            print("Wall: Removed Right")
-    except ValueError:
-        pass
     return random.choice(options)
